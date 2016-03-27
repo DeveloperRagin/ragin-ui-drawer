@@ -1,0 +1,33 @@
+{
+  "name": "ragin-ui-drawer",
+  "version": "1.0.0",
+  "authors": [
+    "Glenn Vandeuren <vandeurenglenn@gmail.com>"
+  ],
+  "description": "An drawer for the 'Ragin' ui.",
+  "keywords": [
+    "web-components",
+    "polymer",
+    "ragin-ui-drawer",
+    "ragin-ui",
+    "ragin",
+    "drawer"
+  ],
+  "main": "ragin-ui-drawer.html",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/DeveloperRagin/ragin-ui-drawer/",
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
+  "dependencies": {
+    "polymer": "^1.2.0",
+    "iron-selector": "^1.3.0",
+    "paper-item": "^1.1.4",
+    "paper-toolbar": "^1.1.4"
+  },
+  "devDependencies": {
+    "iron-component-page": "^1.0.0",
+    "web-component-tester": "^4.0.0"
+  }
+}

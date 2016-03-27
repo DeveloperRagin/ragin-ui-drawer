@@ -1,0 +1,119 @@
+<!--
+@license
+Copyright (c) 2016 Glenn Vandeuren Project Authors. All rights reserved.
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-selector/iron-selector.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-toolbar/paper-toolbar.html">
+
+<!--
+An element providing a solution to no problem in particular.
+
+Example:
+
+    <ragin-ui-drawer></ragin-ui-drawer>
+
+Example:
+
+    <ragin-ui-drawer items='["ragin-todo"]'></ragin-ui-drawer>
+
+@demo demo/index.html
+@hero hero.svg
+-->
+
+<dom-module id="ragin-ui-drawer">
+  <template>
+    <style>
+      :root {
+        --ragin-ui-drawer: {
+          display: block;
+          box-sizing: border-box;
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: 256px;
+          border-right: 1px solid rgba(0, 0, 0, 0.22);
+          background: var(--ragin-ui-drawer-background, #FAFAFA);
+        }
+        --ragin-ui-drawer-toolbar: {
+          background: var(--ragin-ui-drawer-toolbar-background, #FAFAFA);
+          color: var(--ragin-ui-drawer-toolbar-color, rgba(0,0,0,0.54));
+          font-weight: bold;
+        }
+        --ragin-ui-drawer-item: {
+          color: var(--ragin-ui-drawer-item-color, rgba(0,0,0,0.64));
+          font-size: var(--ragin-ui-drawer-item-font-size, 30px);
+          text-transform: capitalize;
+          font-family: "RobotoDraft","Roboto",sans-serif;
+          text-rendering: optimizeLegibility;
+          font-weight: bold;
+        }
+        --ragin-ui-drawer-item-selected: {
+          color: var(--ragin-ui-drawer-item-selected-color, #FFF);
+          background: var(--ragin-ui-drawer-item-selected-background, #888);
+        }
+      }
+      :host {
+        @apply(--ragin-ui-drawer);
+      }
+      paper-item {
+        @apply(--ragin-ui-drawer-item);
+      }
+      paper-item:focus {
+        background: var(--ragin-ui-drawer-item-focused-background, rgba(136,136,136, 0.87));
+      }
+      paper-item.iron-selected {
+        @apply(--ragin-ui-drawer-item-selected);
+      }
+      paper-toolbar {
+        @apply(--ragin-ui-drawer-toolbar);
+      }
+      paper-toolbar.bottom {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        font-size: 20px;
+      }
+    </style>
+    <iron-selector selected="0"  attr-for-selected="item-name" on-iron-select="_onIronSelect">
+      <paper-toolbar class="medium-tall"></paper-toolbar>
+      <template is="dom-repeat" items="[[items]]">
+        <paper-item item-name$="[[item]]">[[item]]</paper-item>
+      </template>
+      <paper-toolbar class="bottom">
+        <content select=".bottom-item"></content>
+      </paper-toolbar>
+    </iron-selector>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'ragin-ui-drawer',
+
+      properties: {
+
+        /**
+         * Describes the author of the element, but is really just an excuse to
+         * show off JSDoc annotations.
+         *
+         * @type {["todo", "time"]}
+         */
+        items: Array
+      },
+
+      /**
+       * The `drawer-item-select` event is fired when `an item in the drawer` is selected.
+       *
+       * @event drawer-item-select
+       * @detail {selected}
+       */
+      _onIronSelect: function() {
+        this.fire('drawer-item-select', event.detail.item.getAttribute('item-name'));
+      }
+    });
+  </script>
+</dom-module>
