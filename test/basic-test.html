@@ -24,8 +24,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!-- You can use the document as a place to set up your fixtures. -->
     <test-fixture id="ragin-ui-drawer-fixture">
       <template>
-        <ragin-ui-drawer>
-          <h2>ragin-ui-drawer</h2>
+        <ragin-ui-drawer items='["todo", "time"]'>
+          <span class="bottom-item"></span>
         </ragin-ui-drawer>
       </template>
     </test-fixture>
@@ -39,30 +39,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           myEl = fixture('ragin-ui-drawer-fixture');
         });
 
-        test('defines the "author" property', function() {
-          assert.equal(myEl.author.name, 'Dimitri Glazkov');
-          assert.equal(myEl.author.image, 'http://addyosmani.com/blog/wp-content/uploads/2013/04/unicorn.jpg');
+        test('defines the "items" property', function() {
+          assert.deepEqual(myEl.items, ['todo', 'time']);
         });
 
-        test('says hello', function() {
-          assert.equal(myEl.sayHello(), 'ragin-ui-drawer says, Hello World!');
-
-          var greetings = myEl.sayHello('greetings Earthlings');
-          assert.equal(greetings, 'ragin-ui-drawer says, greetings Earthlings');
-        });
-
-        test('fires lasers', function(done) {
-          myEl.addEventListener('ragin-ui-drawer-lasers', function(event) {
-            assert.equal(event.detail.sound, 'Pew pew!');
+        test('on-iron-select', function(done) {
+          myEl.addEventListener('drawer-item-select', function(event) {
+            assert.equal(event.detail, 'todo');
             done();
           });
-          myEl.fireLasers();
+          var item = document.createElement('span');
+          item.setAttribute('item-name', 'todo');
+          myEl._onIronSelect({'detail': {'item': item}});
         });
 
         test('distributed children', function() {
           var els = myEl.getContentChildren();
           assert.equal(els.length, 1, 'one distributed node');
-          assert.equal(els[0], myEl.querySelector('h2'), 'content distributed correctly');
+          assert.equal(els[0], myEl.querySelector('span'), 'content distributed correctly');
         });
 
       });

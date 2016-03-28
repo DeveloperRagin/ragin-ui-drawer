@@ -111,7 +111,7 @@ Example:
        * @event drawer-item-select
        * @detail {selected}
        */
-      _onIronSelect: function() {
+      _onIronSelect: function(event) {
         this.fire('drawer-item-select', event.detail.item.getAttribute('item-name'));
       }
     });
