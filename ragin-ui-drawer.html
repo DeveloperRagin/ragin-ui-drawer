@@ -79,15 +79,15 @@ Example:
         font-size: 20px;
       }
     </style>
+    <paper-toolbar class="medium-tall"></paper-toolbar>
     <iron-selector selected="0"  attr-for-selected="item-name" on-iron-select="_onIronSelect">
-      <paper-toolbar class="medium-tall"></paper-toolbar>
       <template is="dom-repeat" items="[[items]]">
         <paper-item item-name$="[[item]]">[[item]]</paper-item>
       </template>
-      <paper-toolbar class="bottom">
-        <content select=".bottom-item"></content>
-      </paper-toolbar>
     </iron-selector>
+    <paper-toolbar class="bottom">
+      <content select=".bottom-item"></content>
+    </paper-toolbar>
   </template>
 
   <script>
